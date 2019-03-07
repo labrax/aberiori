@@ -1,0 +1,30 @@
+[Term]
+id: code
+name: my_name(optional)
+
+[Term]
+id: codeN
+name: my_name_other
+is_a: code
+
+[Term]
+id: codeX
+name: X
+is_a: code
+
+[Term]
+id: codeC
+name: C
+
+[Term]
+id: codeB
+name: BBB
+is_a: codeC
+
+
+[Term]
+id: codeA
+name: AA
+is_a: codeB
+
+
