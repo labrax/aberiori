@@ -72,7 +72,7 @@ Available in the folder *sample_files*
 - transactions.txt
 - other_transaction.txt
 
-Please note the spacing. The parser is hard-coded!
+Please note the spacing in the rows, the parser was hard-coded.
 **The transactions.txt file should be tab-separated**
 
 ### SAMPLE CASES
