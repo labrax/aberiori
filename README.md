@@ -5,7 +5,9 @@
 A rule generation supported by ontologies
 
 This project was developed in the University of Aberystwyth 2014.
+
 Author: Victor Roth Cardoso - sponsored by CNPq (Brazil)
+
 Supervisors: Robert Hoehndorf and Georgios Gkoutos
  
 ## COMPILE
