@@ -1,15 +1,11 @@
 # aberiori 
 
+**DISCLAIMER: USE AT YOUR OWN RISK**
+
 A rule generation supported by ontologies
 
-This project was developed in Aberystwyth University during my exchange program sponsored by CNPq - Brazil (2014).
-
-**USE AT YOUR OWN RISK**
-
-Project during a summer internship in the University of Aberystwyth (2014).
-
-Author: Victor Roth Cardoso - sponsored by CNPq
-
+This project was developed in the University of Aberystwyth 2014.
+Author: Victor Roth Cardoso - sponsored by CNPq (Brazil)
 Supervisors: Robert Hoehndorf and Georgios Gkoutos
  
 ## COMPILE
