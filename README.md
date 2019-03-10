@@ -1,15 +1,20 @@
 # aberiori 
+
+**DISCLAIMER: USE AT YOUR OWN RISK**
+
 A rule generation supported by ontologies
 
-This project was developed in Aberystwyth University during my exchange program sponsored by CNPq - Brazil (2014).
+This project was developed in the University of Aberystwyth 2014.
 
+Author: Victor Roth Cardoso - sponsored by CNPq (Brazil)
 
+Supervisors: Robert Hoehndorf and Georgios Gkoutos
+ 
 ## COMPILE
-	This program uses features of C++11 standard, which gcc4.7.2+ may have.
-	Be sure to have build-essential package on Linux.
+	This program uses features of C++11 standard (available from gcc4.7.2 ?)
+	Be sure to have build-essential package on Linux
 	This program uses pthreads.
-	
-	Use the Makefile to compile. (recommended: make -j <NUMBER_OF_CPUs>)
+	Use the Makefile (e.g. make -j 8)
 	
 ## RUN
 	Run the program as specified in it, or in the end of this section.
@@ -67,12 +72,15 @@ This project was developed in Aberystwyth University during my exchange program 
 Available in the folder *sample_files*
 - sample.obo
 - transactions.txt
+- other_transaction.txt
 
-Please note the spacing. The parser is hard-coded!
+Please note the spacing in the rows, the parser was hard-coded.
+**The transactions.txt file should be tab-separated**
 
 ### SAMPLE CASES
 
 Our ontology has this structure:
+
 codeC -> codeB -> codeA
 
 codeN -> code <- codeX
@@ -83,7 +91,8 @@ codeN -> code <- codeX
 
 - Let's add our ontology
 `$ ./apriori sample_files/transactions.txt sample_files/sample.obo -l 0.7 -c 0.1`
-```support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
+```
+support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
       1          1                 9                          9                       9                -nan        1           0                3       code (my_name(optional)) ===>   codeC (C) 
       1          1                 9                          9                       9                -nan        1           0                3       codeC (C) ===>  code (my_name(optional)) 
 ```
@@ -91,7 +100,8 @@ Now we get the top level relations:
 
 - Let's try a different support!
 `$ ./apriori sample_files/transactions.txt sample_files/sample.obo -l 0.6 -c 0.1`
-```support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
+```
+support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
 0.66667          1                 6                          6                       9                   0        1           1                2       codeB (BBB) ===>        code (my_name(optional)) 
 0.66667    0.66667                 6                          9                       6                   0        1           1                2       code (my_name(optional)) ===>   codeB (BBB) 
       1          1                 9                          9                       9                -nan        1           0                3       code (my_name(optional)) ===>   codeC (C) 
@@ -102,11 +112,11 @@ Now we get the top level relations:
 0.66667    0.66667                 6                          9                       6                   0        1           1                2       codeC (C) ===>  codeN (my_name_other) 
 ```
 In this case we get some other relations
-Note that the relations inside the ontology are filtered!
 
 - Testing sub-classes
 > $ ./apriori sample_files/other_transaction.txt
-```support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
+```
+support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
       1          1                 2                          2                       2                   0        1           0                0       code ===>       codeN 
       1          1                 2                          2                       2                   0        1           0                0       codeN ===>      code 
       1          1                 2                          2                       2                   0        1           0                0       code ===>       codeX 
@@ -123,8 +133,11 @@ Note that the relations inside the ontology are filtered!
 
 - Testing sub-classes with ontology
 > $ ./apriori sample_files/other_transaction.txt sample_files/sample.obo
-```support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent                                                          
+```
+support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent                                                          
       1          1                 2                          2                       2                -nan        1           2                0       codeN (my_name_other) ===>      codeX (X)                                           
       1          1                 2                          2                       2                -nan        1           2                0       codeX (X) ===>  codeN (my_name_other)                                               
 ```
 In this case it is filters the ontology relations.
+
+Note that the relations inside the ontology were filtered!
