@@ -1,6 +1,4 @@
 *.o
 *.out
-apriori
-rule_appender
 
 obj/
