@@ -280,8 +280,8 @@ void print_instructions() {
 		 << endl;
 
 	cerr << "example of use: " << endl
-		 << "./apriori -f mousephenotypes.txt -o mammalian_phenotype.obo -t=20" << endl
-		 << "./apriori mousephenotypes.txt mammalian_phenotype.obo -t -s 0.01 -c 0.3" << endl
+		 << "./aberiori -f mousephenotypes.txt -o mammalian_phenotype.obo -t=20" << endl
+		 << "./aberiori mousephenotypes.txt mammalian_phenotype.obo -t -s 0.01 -c 0.3" << endl
 		 << endl;
 		 
 	exit(-1);

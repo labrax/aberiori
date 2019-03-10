@@ -25,7 +25,7 @@ Supervisors: Robert Hoehndorf and Georgios Gkoutos
 	The ontologies file (of class relationship) is optional. The format /.obo/ 1.2 is accepted.
 	
 	To show options, run as:
-	./apriori -h
+	./aberiori -h
 	
 	---
 	use format:
@@ -57,8 +57,8 @@ Supervisors: Robert Hoehndorf and Georgios Gkoutos
 	the ontologies file is .obo it doesn't need -o
 
 	example of use: 
-	./apriori -f mousephenotypes.txt -o mammalian_phenotype.obo -t=20
-	./apriori mousephenotypes.txt mammalian_phenotype.obo -t -l 0.01 -c 0.3
+	./aberiori -f mousephenotypes.txt -o mammalian_phenotype.obo -t=20
+	./aberiori mousephenotypes.txt mammalian_phenotype.obo -t -l 0.01 -c 0.3
 	---
 
 ## TEST MACHINE
@@ -86,11 +86,11 @@ codeC -> codeB -> codeA
 codeN -> code <- codeX
 
 - Standard use without ontologies
-`$ ./apriori sample_files/transactions.txt  -l 0.7 -c 0.1`
+`$ ./aberiori sample_files/transactions.txt  -l 0.7 -c 0.1`
 > empty result
 
 - Let's add our ontology
-`$ ./apriori sample_files/transactions.txt sample_files/sample.obo -l 0.7 -c 0.1`
+`$ ./aberiori sample_files/transactions.txt sample_files/sample.obo -l 0.7 -c 0.1`
 ```
 support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
       1          1                 9                          9                       9                -nan        1           0                3       code (my_name(optional)) ===>   codeC (C) 
@@ -99,7 +99,7 @@ support confidence      transactions    transactions_antecedent transactions_con
 Now we get the top level relations:
 
 - Let's try a different support!
-`$ ./apriori sample_files/transactions.txt sample_files/sample.obo -l 0.6 -c 0.1`
+`$ ./aberiori sample_files/transactions.txt sample_files/sample.obo -l 0.6 -c 0.1`
 ```
 support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
 0.66667          1                 6                          6                       9                   0        1           1                2       codeB (BBB) ===>        code (my_name(optional)) 
@@ -114,7 +114,7 @@ support confidence      transactions    transactions_antecedent transactions_con
 In this case we get some other relations
 
 - Testing sub-classes
-> $ ./apriori sample_files/other_transaction.txt
+> $ ./aberiori sample_files/other_transaction.txt
 ```
 support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent
       1          1                 2                          2                       2                   0        1           0                0       code ===>       codeN 
@@ -132,7 +132,7 @@ support confidence      transactions    transactions_antecedent transactions_con
 ```
 
 - Testing sub-classes with ontology
-> $ ./apriori sample_files/other_transaction.txt sample_files/sample.obo
+> $ ./aberiori sample_files/other_transaction.txt sample_files/sample.obo
 ```
 support confidence      transactions    transactions_antecedent transactions_consequent semantic_similarity     lift    sumDepth        sumHeight       Antecedent===>  Consequent                                                          
       1          1                 2                          2                       2                -nan        1           2                0       codeN (my_name_other) ===>      codeX (X)                                           

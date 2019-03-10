@@ -17,7 +17,7 @@
 
 #include "../common/ontologies/ontology.hpp"
 
-class Apriori {
+class Aberiori {
 	private:
 		Parameters parameters;
 
@@ -30,8 +30,8 @@ class Apriori {
 		uint64_t max_transactions;
 
 	public:		
-		Apriori(int argc, char * argv[]);
-		~Apriori();
+		Aberiori(int argc, char * argv[]);
+		~Aberiori();
 		
 		void setup();
 		void run();

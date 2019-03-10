@@ -82,7 +82,7 @@ class AprioriRunner:
 			self.argsToRun.append("-t" + str(thread))
 		
 	def __init__(self, transactions_file, phenotypes_file):
-		self.args = ["time", "./apriori", "-f", transactions_file, "-o", phenotypes_file]
+		self.args = ["time", "./aberiori", "-f", transactions_file, "-o", phenotypes_file]
 		self.num = 0
 		
 		try:

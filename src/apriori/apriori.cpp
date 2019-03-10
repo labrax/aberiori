@@ -31,7 +31,7 @@ using namespace std;
 
 #ifndef _TEST_
 int main(int argc, char *argv[]) {
-	Apriori program(argc, argv);
+	Aberiori program(argc, argv);
 	
 	program.setup();
 	program.run();
@@ -40,15 +40,15 @@ int main(int argc, char *argv[]) {
 }
 #endif
 
-Apriori::Apriori(int argc, char * argv[]) : parameters(argc, argv) {
+Aberiori::Aberiori(int argc, char * argv[]) : parameters(argc, argv) {
 	
 }
 
-Apriori::~Apriori() {
+Aberiori::~Aberiori() {
 	
 }
 
-void Apriori::setup() {
+void Aberiori::setup() {
 	database = new DatabaseNormalized(parameters.phenotypesFile(), parameters.isPreprocessed());
 	
 	if(parameters.useOntology()) {
@@ -95,7 +95,7 @@ void Apriori::setup() {
 		cout << "The maximum support is obtained with " << max_transactions  << " transactions" << endl;
 }
 
-void Apriori::run() {
+void Aberiori::run() {
 	//!OBTAINING 1-ITEMSETS
 	std::map<string, uint64_t> itemset_1;
 	for(auto &i : database->getNormalizedTransactions()) {
