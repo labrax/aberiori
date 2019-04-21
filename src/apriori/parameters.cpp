@@ -310,8 +310,8 @@ void print_instructions() {
 		 << "-l	minsupport <number 0 to 1>: minimum support value - default 0.5" << endl
 		 << "-u	maxsupport <number 0 to 1>: maximum support value - default 1" << endl
 		 << endl
-		 << "-R to enable rules-filtering" << endl
-		 << "-I to enable itemset-filtering" << endl
+		 << "-R to enable rules-filtering: this function will reduce the number of generated rules if there are rules more specific - THIS FUNCTION WILL AFFECT THE RESULTS" << endl
+		 << "-I to enable itemset-filtering: this function will reduce the number of itemsets to more specific - THIS OPTION WILL AFFECT THE RESULTS" << endl
 		 << "-M <number> to limit the number of iterations" << endl
 		 << endl
 		 << "-t	thread <optional: number of threads>: to use parallelization" << endl

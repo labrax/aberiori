@@ -43,6 +43,10 @@ const bool & Ontology::isProcessed() {
 	return processed;
 }
 
+/**
+ * Process the ontology, note the hardcoding parts of the code
+ *
+ */
 void Ontology::processOntologies() {
 	if(file.is_open()) {
 		string line;
@@ -146,38 +150,51 @@ void Ontology::createNode(string id, string name, bool is_obsolete, vector<pair<
 	//!create the parents
 }
 
+/***
+ * Evaluates if the two terms are related
+ *
+ * @param ontologyA the first term
+ * @param ontologyB the second term
+ * @return if the are related (sub/superclass)
+ *
+ */
 bool Ontology::checkAncestorOneAnother(string ontologyA, string ontologyB) {
 	if(processed == false)
 		cerr << "using ontologies without being loaded! " << __FILE__ << ":" << __LINE__ << endl;
 	map<string, NodeOntology *>::iterator itA = ontologies.find(ontologyA);
 	map<string, NodeOntology *>::iterator itB = ontologies.find(ontologyB);
 	
-	if(itA == ontologies.end() || itB == ontologies.end()) { //both doesn't exist on the relations
+	if(itA == ontologies.end() || itB == ontologies.end()) { //at least one don't exist on the relations
+		cerr << "there are elements not declared in the ontology! " << __FILE__ << ":" << __LINE__ << endl;
+		cerr << "check for: \"" << ontologyA << "\" \"" << ontologyB << "\" " << endl;
 		return false;
 	}
-	else {
-		if(itA->second->isSon(ontologyB))
-			return true;
-		else if(itB->second->isSon(ontologyA))
-			return true;
-		return false;
-	}
+	if(itA->second->isSon(ontologyB) || itB->second->isSon(ontologyA)) //either is son of the other
+		return true;
+	return false;
 }
 
+/**
+ * Evaluates if there is a relation sub-superclass
+ *
+ * @param child the subclass
+ * @param parent the superclass
+ * @return if they are related (sub/superclass)
+ */
 bool Ontology::checkSon(string child, string parent) {
 	if(processed == false)
 		cerr << "using ontologies without being loaded! " << __FILE__ << ":" << __LINE__ << endl;
 	map<string, NodeOntology *>::iterator itA = ontologies.find(child);
 	map<string, NodeOntology *>::iterator itB = ontologies.find(parent);
 	
-	if(itA == ontologies.end() || itB == ontologies.end()) { //both doesn't exist on the relations
+	if(itA == ontologies.end() || itB == ontologies.end()) { //at least one don't exist on the relations
+		cerr << "there are elements not declared in the ontology! " << __FILE__ << ":" << __LINE__ << endl;
+		cerr << "check for: \"" << child << "\" \"" << parent << "\" " << endl;
 		return false;
 	}
-	else {
-		if(itA->second->isSon(parent))
-			return true;
-		return false;
-	}	
+	if(itA->second->isSon(parent))
+		return true;
+	return false;
 }
 
 void Ontology::appendOntologies(vector<pair<string, string>> * normalized_transactions) {
@@ -230,21 +247,28 @@ void Ontology::appendOntologies(vector<pair<string, string>> * normalized_transa
 		cout << increased_size << " items added to transactions" << endl;
 }
 
+/**
+ * This function prints the ontology
+ *
+ */
 void Ontology::print() {
 	if(processed == false)
 		cerr << "using ontologies without being loaded! " << __FILE__ << ":" << __LINE__ << endl;
-	for(auto & o : ontologies) {
+	for(auto & o : ontologies)
 		o.second->print();
-	}
 }
 
+/**
+ * Given a string identifier returns the Node element
+ *
+ * @param identifier the term id
+ * @return the element or NULL if not found
+ */
 NodeOntology * Ontology::getNode(string identifier) {
 	map<string, NodeOntology *>::iterator it = ontologies.find(identifier);
-	if(it != ontologies.end()) {
+	if(it != ontologies.end())
 		return it->second;
-	}
-	else
-		return NULL;
+	return NULL;
 }
 
 vector <pair <string, string>> * Ontology::getNewOntologies(vector <pair <string, string>> & transaction) {
@@ -286,16 +310,22 @@ vector <pair <string, string>> * Ontology::getNewOntologies(vector <pair <string
 	return newTransactions;
 }
 
+/**
+ * Get the distance between of two terms
+ *
+ * @param a the first identifier
+ * @param b the second identifier
+ * @return distance_d distance
+ */
 distance_to Ontology::getDistance(string & a, string & b) {
 	distance_to d;
 	map<string, NodeOntology *>::iterator itA = ontologies.find(a);
 	map<string, NodeOntology *>::iterator itB = ontologies.find(b);
 	
-	if(itA == ontologies.end() || itB == ontologies.end()) { //at least one of them was not found
+	if(itA == ontologies.end() || itB == ontologies.end()) //at least one of them was not found
 		d.isFound = false;
-	}
-	else {
+	else
 		d = itA->second->getDistance(itB->second, true);
-	}
 	return d;
 }
+
