@@ -48,6 +48,7 @@ const bool & Ontology::isProcessed() {
  *
  */
 void Ontology::processOntologies() {
+    unsigned long created_terms = 0;
 	if(file.is_open()) {
 		string line;
 		
@@ -66,6 +67,7 @@ void Ontology::processOntologies() {
 					continue;
 				
 				createNode(id, name, is_obsolete, &is_a, &consider, replaced_by);
+                created_terms++;
 				
 				//!reset the data for the next ontology
 				id = "";
@@ -101,6 +103,7 @@ void Ontology::processOntologies() {
 		
 		if(id != "") { //save if there is information not saved on the loop
 			createNode(id, name, is_obsolete, &is_a, &consider, replaced_by);
+            created_terms++;
 		}
 		
 		//!set depth and height
@@ -115,9 +118,14 @@ void Ontology::processOntologies() {
 		//!set depth and height
 		processed = true;
 	}
+    if(Parameters::verbose) {
+        cout << "loaded " << created_terms << " terms from ontology!" << endl;
+    }
 }
 
 void Ontology::createNode(string id, string name, bool is_obsolete, vector<pair<string, string>> * is_a, vector<string> * consider, string replaced_by) { //TODO: use /consider/ and /replaced_by/ fields if needed
+    if(Parameters::debug)
+        cout << "adding node '" << id << "': '" << name << "'" << endl;
 	NodeOntology * nNode;
 	//!create the node
 	map<string, NodeOntology *>::iterator it = ontologies.find(id);
